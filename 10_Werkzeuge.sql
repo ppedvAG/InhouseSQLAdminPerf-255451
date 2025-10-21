@@ -71,3 +71,58 @@ Einarbeitung nötig (GUI in SSMS oder T-SQL-Definitionen).
 
 
 7. Datenbankoptimierungsratgeber
+
+Der Datenbankoptimierungsratgeber (Database Tuning Advisor, DTA) ist ein Tool 
+, das Empfehlungen zur Verbesserung der Abfrageleistung gibt. 
+Der Query Store (QS) ist eine Funktion, die Verlaufsdaten zu Abfragen 
+und Ausführungsplänen aufzeichnet und es Ihnen ermöglicht, 
+Leistungsänderungen zu überwachen und Probleme zu diagnostizieren.
+
+
+Der Datenbankoptimierungsratgeber (DTA) ist im Wesentlichen ein Analyse- 
+und Empfehlungstool. Sie "füttern" ihn mit einer Sammlung von SQL-Abfragen 
+(einer "Workload"), und der DTA analysiert diese Workload im Kontext 
+Ihres aktuellen Datenbankschemas (Tabellen, vorhandene Indizes usw.).
+
+Basierend auf dieser Analyse gibt der DTA konkrete Empfehlungen ab, 
+um die Gesamtleistung dieser Workload zu optimieren.
+
+Die Hauptaufgaben und Empfehlungen des DTA sind:
+
+Index-Empfehlungen: Dies ist die häufigste Verwendung. 
+Der DTA schlägt vor:
+
+Neue Indizes zu erstellen (geclustert, nicht geclustert, 
+gefiltert und Columnstore).
+
+Bestehende Indizes zu löschen, die redundant sind 
+oder nicht verwendet werden.
+
+Indizierte Sichten zu erstellen, um komplexe Aggregationen 
+oder Joins zu beschleunigen.
+
+Statistiken: Er kann das Erstellen oder Aktualisieren 
+von Spaltenstatistiken empfehlen, um dem Abfrageoptimierer 
+bessere Informationen für die Planerstellung zu geben.
+
+Partitionierung: Bei sehr großen Tabellen kann der DTA Strategien 
+zur horizontalen Partitionierung vorschlagen.
+
+Der DTA kann den Query Store als direkte Workload-Quelle verwenden. 
+Anstatt mühsam eine Trace-Datei zu erstellen, können Sie dem DTA 
+einfach sagen, er soll die "Top 1000" teuersten Abfragen direkt
+aus dem Query Store analysieren. Dies ist oft der effizienteste Weg, 
+um die realen, aktuellen Leistungsprobleme Ihrer Datenbank zu finden 
+und zu beheben.
+
+
+1 .QueryStore als Quelle wählen.
+2. Auslastungs DB wählen , um Ergbnisse des DTA zu zwischenspeichern
+3. DB auswählen und alle Tabelle angeben
+4. Alle Indizes wählen evtl auch gefiltert und Columnstore
+   Tipp:: Erweiterte optionen. Max empfohlenen Speicherplatz aktivieren
+			und Wert übernehmen 
+5. Analyse starten
+6. nie abbrechen!
+7. Empfehlungen untersuchen (Berichte und SQL Skripte generieren)
+
