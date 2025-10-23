@@ -17,6 +17,6 @@ select * from ku
 select * into ku1 from ku
 
 --Identity Wert dazunehmen
-alter table ku1 add ID int identity
+alter table ku1 add ID int identity --> Problem der forward_record_count wird erzeugt
 
 
